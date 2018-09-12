@@ -14,7 +14,7 @@ if (process.platform === 'darwin') {
         click() {
           console.log(app.getAppPath());
           const options = { width: 800, height: 600 },
-            windowUrl = 'file://' + resolve(isDev ? __dirname : app.getAppPath(), '../', 'views', 'index.html');
+            windowUrl = 'file://' + resolve(isDev ? __dirname : app.getAppPath(), '../', 'renderer', 'index.html');
           let menuWindow;
           function createWindow() {
             menuWindow = initWindow(windowUrl, options);
