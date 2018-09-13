@@ -1,1 +1,1 @@
-# TinyPNGClient
+# tiny

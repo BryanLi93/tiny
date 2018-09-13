@@ -1,6 +1,6 @@
 const { app } = require('electron'),
   { resolve } = require('path'),
-  { isDev } = require('./config/env.js'),
+  { isDev } = require('../app/config/env.js'),
   { createMenu } = require('./main/menu.js'),
   { initWindow } = require('./main/window.js');
 
