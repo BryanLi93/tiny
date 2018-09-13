@@ -3,11 +3,7 @@
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
-    "ele-start": "electron app",
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "start": "electron app"
   },
   "repository": "https://github.com/BryanLi93/TinyPNGClient.git",
   "author": "BryanLi93 <lisujianskills@outlook.com>",
@@ -16,9 +12,6 @@
     "electron": "^2.0.8"
   },
   "dependencies": {
-    "react": "^16.5.0",
-    "react-dom": "^16.5.0",
-    "react-scripts": "1.1.5",
     "tinify": "^1.6.0-beta.2"
   }
 }
