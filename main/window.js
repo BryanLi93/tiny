@@ -5,6 +5,6 @@ const { BrowserWindow } = require('electron'),
 exports.initWindow = (windowUrl, options) => {
   const _window = new BrowserWindow(options);
   _window.loadURL(windowUrl);
-  isDev && _window.webContents.openDevTools();
+  isDev() && _window.webContents.openDevTools();
   return _window;
 };

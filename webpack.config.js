@@ -1,26 +1,13 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin'),
   { resolve } = require('path'),
-  { ProvidePlugin } = require('webpack');
-
-const nodeEnv = process.env.NODE_ENV || 'development',
-  isProd = nodeEnv === 'production';
+  { ProvidePlugin, HotModuleReplacementPlugin } = require('webpack'),
+  { isDev } = require('./config/env.js'),
+  merge = require('webpack-merge');
 
 const baseConfig = {
-
-};
-
-const devConfig = {
-
-};
-
-const prodConfig = {
-
-};
-
-module.exports = {
   entry: './renderer/index.js',
   output: {
-    path: resolve(__dirname, 'dist'),
+    path: resolve(__dirname, 'dist/web'),
     filename: '[name].[hash:5].js',
   },
   module: {
@@ -32,17 +19,37 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['css-loader', 'style-loader'],
+        use: ['style-loader', 'css-loader'],
       }
     ]
   },
   plugins: [
+    new ProvidePlugin({
+      React: 'react'
+    }),
     new HtmlWebpackPlugin({
       template: 'renderer/index.html',
       inject: true,
     }),
-    new ProvidePlugin({
-      React: 'react'
-    })
+  ],
+};
+
+const devConfig = {
+  mode: 'development',
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './dist',
+    hot: true,
+  },
+  plugins: [
+    new HotModuleReplacementPlugin(),
+  ],
+};
+
+const prodConfig = {
+  mode: 'production',
+  plugins: [
   ]
 };
+
+module.exports = merge(baseConfig, isDev() ? devConfig : prodConfig);

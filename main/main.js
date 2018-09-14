@@ -1,13 +1,12 @@
-const { app } = require('electron'),
+const { app, dialog } = require('electron'),
   { resolve } = require('path'),
-  { isDev } = require('../app/config/env.js'),
-  { createMenu } = require('./main/menu.js'),
-  { initWindow } = require('./main/window.js');
-
+  { createMenu } = require('./menu.js'),
+  { initWindow } = require('./window.js'),
+  { isDev } = require('../config/env.js');
 function init() {
   // init window
   const options = { width: 800, height: 600 },
-    windowUrl = 'file://' + resolve(isDev ? __dirname : app.getAppPath(), 'views', 'index.html');
+    windowUrl = isDev() ? 'http://localhost:8081' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
   let mainWindow;
   function createWindow () {
     mainWindow = initWindow(windowUrl, options);
@@ -23,6 +22,7 @@ function init() {
   });
   // init menu
   createMenu();
+  dialog.showMessageBox({ message: `windowUrl: ${windowUrl}`});
 }
 
 app.on('ready', init);

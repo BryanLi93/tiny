@@ -4,7 +4,7 @@ const { app, Menu } = require('electron'),
   { initWindow } = require('./window.js');
 
 const templete = []
-  menu = null;
+menu = null;
 if (process.platform === 'darwin') {
   templete.unshift({
     label: app.getName(),
@@ -12,9 +12,8 @@ if (process.platform === 'darwin') {
       {
         label: 'Preferences...',
         click() {
-          console.log(app.getAppPath());
           const options = { width: 800, height: 600 },
-            windowUrl = 'file://' + resolve(isDev ? __dirname : app.getAppPath(), '../', 'views', 'index.html');
+            windowUrl = isDev() ? 'http://localhost:8081' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
           let menuWindow;
           function createWindow() {
             menuWindow = initWindow(windowUrl, options);

@@ -1,7 +1,7 @@
 export default class App extends React.Component {
   render () {
     return (
-      <h1>你好！</h1>
+      <h1>我是App.js！</h1>
     );
   }
 }
