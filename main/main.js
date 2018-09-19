@@ -25,7 +25,6 @@ function init() {
   });
   // init menu
   createMenu();
-  // dialog.showMessageBox({ message: `windowUrl: ${windowUrl}`});
 }
 
 app.on('ready', init);

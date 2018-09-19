@@ -22,9 +22,10 @@
       "dist/web/**/*"
     ],
     "mac": {
-      "category": "public.app-category.developer-tools"
-    },
-    "asar": false
+      "category": "public.app-category.developer-tools",
+      "target": "dmg",
+      "icon": "./assets/compressor.png"
+    }
   },
   "dependencies": {
     "antd": "^3.9.2",
