@@ -6,6 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'),
 
 const baseConfig = {
   entry: './renderer/index.js',
+  target: 'electron-renderer',
   output: {
     path: resolve(__dirname, 'dist/web'),
     filename: '[name].[hash:5].js',
@@ -40,6 +41,11 @@ const devConfig = {
   devServer: {
     contentBase: './dist',
     hot: true,
+    proxy: {
+      '/shrink': {
+        target: 'https://api.tinify.com/shrink',
+      }
+    }
   },
   plugins: [
     new HotModuleReplacementPlugin(),

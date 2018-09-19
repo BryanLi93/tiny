@@ -3,9 +3,12 @@ const { app, dialog } = require('electron'),
   { createMenu } = require('./menu.js'),
   { initWindow } = require('./window.js'),
   { isDev } = require('../config/env.js');
+
+require('./upload.js');
+
 function init() {
   // init window
-  const options = { width: 800, height: 600 },
+  const options = { width: 400, height: 600 },
     windowUrl = isDev() ? 'http://localhost:8081' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
   let mainWindow;
   function createWindow () {
@@ -22,7 +25,7 @@ function init() {
   });
   // init menu
   createMenu();
-  dialog.showMessageBox({ message: `windowUrl: ${windowUrl}`});
+  // dialog.showMessageBox({ message: `windowUrl: ${windowUrl}`});
 }
 
 app.on('ready', init);
