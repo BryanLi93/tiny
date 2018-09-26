@@ -1,7 +1,7 @@
-const { app, Menu } = require('electron'),
+const { app, Menu, dialog } = require('electron'),
   { resolve } = require('path'),
   { isDev } = require('../config/env.js'),
-  { initWindow } = require('./window.js');
+  { initWindow  } = require('./window.js');
 
 const templete = []
 menu = null;
@@ -12,8 +12,8 @@ if (process.platform === 'darwin') {
       {
         label: 'Preferences...',
         click() {
-          const options = { width: 800, height: 600 },
-            windowUrl = isDev() ? 'http://localhost:8081' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
+          const options = { width: 400, height: 400 },
+            windowUrl = isDev() ? 'http://localhost:8080/#/menu' : `file://${resolve(app.getAppPath(), 'dist/web/index.html/#/menu')}`;
           let menuWindow;
           function createWindow() {
             menuWindow = initWindow(windowUrl, options);
@@ -22,6 +22,10 @@ if (process.platform === 'darwin') {
             });
           }
           createWindow();
+          //TODO: 现在跳转是先打开主页，然后主进程发送打开菜单页的消息，渲染进程再跳转，延时的方法需要优化下
+          // setTimeout(() => {
+          //   menuWindow.webContents.send('openMenu');
+          // }, 1000);
         },
       },
     ],

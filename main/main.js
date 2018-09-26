@@ -4,12 +4,12 @@ const { app, dialog } = require('electron'),
   { initWindow } = require('./window.js'),
   { isDev } = require('../config/env.js');
 
-require('./upload.js');
+require('./ipcMainListeners.js');
 
 function init() {
   // init window
   const options = { width: 400, height: 600 },
-    windowUrl = isDev() ? 'http://localhost:8081' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
+    windowUrl = isDev() ? 'http://localhost:8080' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
   let mainWindow;
   function createWindow () {
     mainWindow = initWindow(windowUrl, options);

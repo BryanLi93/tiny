@@ -5,6 +5,7 @@ tinify.key = 'QurGWqITbWSRB9tn0EEe3Iv9dzpNYjnP';
 
 ipcMain.on('upload', (event, arg) => {
   const source = tinify.fromFile(arg);
-  source.toFile(arg);
-  dialog.showMessageBox({ message: '图片压缩成功~'});
+  source.toFile(arg).then(() => {
+    dialog.showMessageBox({ message: '图片压缩成功~'});
+  });
 });

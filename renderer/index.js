@@ -1,5 +1,5 @@
 import { render } from 'react-dom';
-import App from './view/App.js';
+import router from './router/router.js';
 
 function disableDragFile () {
   document.addEventListener('drop', e => {
@@ -15,5 +15,5 @@ function disableDragFile () {
 disableDragFile();
 
 render(
-  <App />
+  router
 , document.getElementById('root'));
