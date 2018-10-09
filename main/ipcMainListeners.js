@@ -8,6 +8,6 @@ ipcMain.on('upload', (event, args) => {
   tinify.key = args.apiKey;
   const source = tinify.fromFile(args.path);
   source.toFile(args.path).then(() => {
-    dialog.showMessageBox({ message: '图片压缩成功~'});
+    dialog.showMessageBox({ message: '图片压缩成功~' });
   });
 });

@@ -4,20 +4,20 @@ const FormItem = Form.Item;
 
 const MenuMain = Form.create()(
   class extends React.Component {
-    render () {
-      const { getFieldDecorator} = this.props.form;
+    render() {
+      const { getFieldDecorator } = this.props.form;
       const formItemLayout = {
         labelCol: {
-          span: 6,
+          span: 6
         },
         wrapperCol: {
-          span: 14,
+          span: 14
         }
       };
       const tailFormItemLayout = {
         wrapperCol: {
           span: 18,
-          offset: 6,
+          offset: 6
         }
       };
       const save = () => {
@@ -25,15 +25,19 @@ const MenuMain = Form.create()(
         if (apiKey) {
           window.localStorage.setItem('apiKey', apiKey);
         }
-      }
+      };
 
       return (
         <Form>
           <FormItem label="Api Key" {...formItemLayout}>
-            {getFieldDecorator('apiKey', {initialValue: window.localStorage.getItem('apiKey')})(<Input />)}
+            {getFieldDecorator('apiKey', {
+              initialValue: window.localStorage.getItem('apiKey')
+            })(<Input />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
-            <Button type="primary" onClick={save}>保存</Button>
+            <Button type="primary" onClick={save}>
+              保存
+            </Button>
           </FormItem>
         </Form>
       );

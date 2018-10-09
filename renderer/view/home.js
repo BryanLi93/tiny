@@ -1,10 +1,10 @@
 import FileDragArea from '../compoenent/FileDragArea.js';
 
 export default class Home extends React.Component {
-  render () {
+  render() {
     return (
       <div>
-        <FileDragArea/>
+        <FileDragArea />
       </div>
     );
   }

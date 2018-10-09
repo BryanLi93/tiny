@@ -10,18 +10,18 @@ const baseConfig = {
   // target: 'web',
   output: {
     path: resolve(__dirname, 'dist/web'),
-    filename: '[name].[hash:5].js',
+    filename: '[name].[hash:5].js'
   },
   module: {
     rules: [
       {
         test: /\.js$/,
         use: ['babel-loader'],
-        exclude: /node_modules/,
+        exclude: /node_modules/
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader']
       }
     ]
   },
@@ -32,9 +32,9 @@ const baseConfig = {
     }),
     new HtmlWebpackPlugin({
       template: 'renderer/index.html',
-      inject: true,
-    }),
-  ],
+      inject: true
+    })
+  ]
 };
 
 const devConfig = {
@@ -45,20 +45,17 @@ const devConfig = {
     hot: true,
     proxy: {
       '/shrink': {
-        target: 'https://api.tinify.com/shrink',
+        target: 'https://api.tinify.com/shrink'
       }
-    },
+    }
     // historyApiFallback: true,
   },
-  plugins: [
-    new HotModuleReplacementPlugin(),
-  ],
+  plugins: [new HotModuleReplacementPlugin()]
 };
 
 const prodConfig = {
   mode: 'production',
-  plugins: [
-  ]
+  plugins: []
 };
 
 module.exports = merge(baseConfig, isDev() ? devConfig : prodConfig);

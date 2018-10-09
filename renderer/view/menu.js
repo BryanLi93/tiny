@@ -1,5 +1,5 @@
 import { Tabs } from 'antd';
-import MenuMain from '../compoenent/Menu.Main.js'
+import MenuMain from '../compoenent/Menu.Main.js';
 import styled from 'styled-components';
 
 const TabPane = Tabs.TabPane;
@@ -11,7 +11,7 @@ const TabsStyled = styled(Tabs)`
 `;
 
 export default class Menu extends React.Component {
-  render () {
+  render() {
     return (
       <div>
         <TabsStyled type="card">

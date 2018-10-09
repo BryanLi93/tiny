@@ -9,11 +9,13 @@ require('./ipcMainListeners.js');
 function init() {
   // init window
   const options = { width: 400, height: 600 },
-    windowUrl = isDev() ? 'http://localhost:8080' : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
+    windowUrl = isDev()
+      ? 'http://localhost:8080'
+      : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
   // const options = { width: 600, height: 600 },
   // windowUrl = isDev() ? 'http://localhost:8080/#/menu' : `file://${resolve(app.getAppPath(), 'dist/web/index.html/#/menu')}`;
   let mainWindow;
-  function createWindow () {
+  function createWindow() {
     mainWindow = initWindow(windowUrl, options);
     mainWindow.on('closed', () => {
       mainWindow = null;
@@ -34,5 +36,5 @@ app.on('ready', init);
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
-  };
+  }
 });
