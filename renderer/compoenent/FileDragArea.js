@@ -1,12 +1,15 @@
 import { Upload, Icon, message } from 'antd';
+import { apiKey } from '../../config/tinyPNG.js'
 const Dragger = Upload.Dragger;
 const { ipcRenderer } = require('electron');
 
 const props = {
   multiple: true,
   beforeUpload (file) {
-    ipcRenderer.send('upload', file.path);
-    console.log(file.path);
+    ipcRenderer.send('upload', {
+      path: file.path,
+      apiKey: window.localStorage.getItem('apiKey') || apiKey,
+    });
     return false;
   },
 };

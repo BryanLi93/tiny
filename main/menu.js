@@ -10,9 +10,9 @@ if (process.platform === 'darwin') {
     label: app.getName(),
     submenu: [
       {
-        label: 'Preferences...',
+        label: '偏好设置...',
         click() {
-          const options = { width: 400, height: 400 },
+          const options = { width: 600, height: 600 },
             windowUrl = isDev() ? 'http://localhost:8080/#/menu' : `file://${resolve(app.getAppPath(), 'dist/web/index.html/#/menu')}`;
           let menuWindow;
           function createWindow() {
@@ -29,6 +29,13 @@ if (process.platform === 'darwin') {
         },
       },
     ],
+  }, {
+    label: '编辑',
+    submenu: [
+      {
+        label: '全选'
+      }
+    ]
   });
 };
 

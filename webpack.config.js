@@ -27,7 +27,8 @@ const baseConfig = {
   },
   plugins: [
     new ProvidePlugin({
-      React: 'react'
+      React: 'react',
+      styled: 'styled-components'
     }),
     new HtmlWebpackPlugin({
       template: 'renderer/index.html',
