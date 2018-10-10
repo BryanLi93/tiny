@@ -4,8 +4,6 @@ import styled from 'styled-components';
 
 const TabPane = Tabs.TabPane;
 
-console.log(styled);
-
 const TabsStyled = styled(Tabs)`
   padding: 6px;
 `;

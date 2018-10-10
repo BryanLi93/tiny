@@ -1,5 +1,6 @@
 {
   "name": "tiny",
+  "productName": "Tiny",
   "version": "1.0.0",
   "description": "Compress PNG and JPG",
   "author": "BryanLi93 <lisujianskills@outlook.com>",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.1",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.0.0",
     "@babel/preset-react": "^7.0.0",
     "babel-loader": "^8.0.2",

@@ -8,8 +8,10 @@ menu = null;
 if (process.platform === 'darwin') {
   templete.unshift(
     {
-      label: app.getName(),
+      label: 'Tiny',
       submenu: [
+        { label: '关于 Tiny', role: 'about' },
+        { type: 'separator' },
         {
           label: '偏好设置...',
           accelerator: 'CmdOrCtrl+,',
@@ -34,7 +36,15 @@ if (process.platform === 'darwin') {
             //   menuWindow.webContents.send('openMenu');
             // }, 1000);
           }
-        }
+        },
+        { type: 'separator' },
+        { label: '服务', role: 'services', submenu: [] },
+        { type: 'separator' },
+        { label: '隐藏 Tiny', role: 'hide' },
+        { label: '隐藏其他', role: 'hideothers' },
+        { label: '全部显示', role: 'unhide' },
+        { type: 'separator' },
+        { label: '退出 Tiny', role: 'quit' }
       ]
     },
     {
@@ -50,8 +60,12 @@ if (process.platform === 'darwin') {
       ]
     },
     {
-      role: '窗口',
-      submenu: [{ role: 'minimize' }, { role: 'close' }]
+      label: '窗口',
+      role: 'window',
+      submenu: [
+        { label: '最小化', role: 'minimize' },
+        { label: '关闭窗口', role: 'close' }
+      ]
     }
   );
 }

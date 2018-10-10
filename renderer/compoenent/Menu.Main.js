@@ -1,4 +1,5 @@
 import { Form, Input, Button } from 'antd';
+import ApiKeyPopover from './Menu.Main.Popover.ApiKey.js';
 
 const FormItem = Form.Item;
 
@@ -29,10 +30,10 @@ const MenuMain = Form.create()(
 
       return (
         <Form>
-          <FormItem label="Api Key" {...formItemLayout}>
+          <FormItem label="ApiKey" {...formItemLayout}>
             {getFieldDecorator('apiKey', {
               initialValue: window.localStorage.getItem('apiKey')
-            })(<Input />)}
+            })(<Input addonAfter={<ApiKeyPopover />} />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" onClick={save}>

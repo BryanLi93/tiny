@@ -8,7 +8,6 @@ export default (
     <div>
       <Route exact path="/" component={home} />
       <Route path="/menu" component={menu} />
-      {/* <IpcRenderListeners /> */}
     </div>
   </HashRouter>
 );
