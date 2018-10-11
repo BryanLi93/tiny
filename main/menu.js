@@ -21,7 +21,7 @@ if (process.platform === 'darwin') {
                 ? 'http://localhost:8080/#/menu'
                 : `file://${resolve(
                     app.getAppPath(),
-                    'dist/web/index.html/#/menu'
+                    'dist/web/index.html#/menu'
                   )}`;
             let menuWindow;
             function createWindow() {

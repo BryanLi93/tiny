@@ -1,4 +1,5 @@
 import { Form, Input, Button } from 'antd';
+import { apiKey as key } from '../../config/tinyPNG.js';
 import ApiKeyPopover from './Menu.Main.Popover.ApiKey.js';
 
 const FormItem = Form.Item;
@@ -32,7 +33,7 @@ const MenuMain = Form.create()(
         <Form>
           <FormItem label="ApiKey" {...formItemLayout}>
             {getFieldDecorator('apiKey', {
-              initialValue: window.localStorage.getItem('apiKey')
+              initialValue: window.localStorage.getItem('apiKey') || key
             })(<Input addonAfter={<ApiKeyPopover />} />)}
           </FormItem>
           <FormItem {...tailFormItemLayout}>
