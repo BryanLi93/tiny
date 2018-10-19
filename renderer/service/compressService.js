@@ -1,10 +1,12 @@
 import { apiKey } from '../../config/tinyPNG.js';
+import { local } from '../util/storage.js';
 const { ipcRenderer } = require('electron');
 
 const sendCompress = fileList => {
-  //TODO:文件压缩后存储的路径，暂时是覆盖原文件
-  const key = window.localStorage.getItem('apiKey') || apiKey;
-  const filePathList = fileList.map(f => f.path);
+  const key = local.get('apiKey') || apiKey,
+    filePathList = fileList.map(f => f.path),
+    isOverride = local.get('isOverride'),
+    overrideDir = local.get('overrideDir');
 
   return new Promise((resolve, reject) => {
     ipcRenderer.on('compress:success', () => {
@@ -15,7 +17,9 @@ const sendCompress = fileList => {
     });
     ipcRenderer.send('compress', {
       key,
-      filePathList
+      filePathList,
+      isOverride,
+      overrideDir
     });
   });
 };

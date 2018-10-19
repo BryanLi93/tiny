@@ -66,6 +66,11 @@ if (process.platform === 'darwin') {
         { label: '最小化', role: 'minimize' },
         { label: '关闭窗口', role: 'close' }
       ]
+    },
+    {
+      label: '帮助',
+      role: 'help',
+      submenu: [{ label: '切换开发者人员工具', role: 'toggledevtools' }]
     }
   );
 }
