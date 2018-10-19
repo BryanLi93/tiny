@@ -6,7 +6,6 @@ function getFileNameFromPath(path) {
 }
 
 const onCompress = _window => {
-      const promise = tinify.fromFile(path).toFile(path);
   ipcMain.on(
     'compress',
     (event, { key, filePathList, isOverride, overrideDir }) => {
