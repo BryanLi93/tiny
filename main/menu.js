@@ -1,4 +1,4 @@
-const { app, Menu, dialog } = require('electron'),
+const { app, Menu } = require('electron'),
   { resolve } = require('path'),
   { isDev } = require('../config/env.js'),
   { initWindow } = require('./window.js');
@@ -30,6 +30,25 @@ const templete = [
     submenu: [{ label: '切换开发者人员工具', role: 'toggledevtools' }]
   }
 ];
+
+const preferencesAction = () => {
+  const options = { width: 600, height: 600 },
+    windowUrl = isDev()
+      ? 'http://localhost:8080/#/menu'
+      : `file://${resolve(
+        app.getAppPath(),
+        'dist/web/index.html#/menu'
+      )}`;
+  let menuWindow;
+  function createWindow() {
+    menuWindow = initWindow(windowUrl, options);
+    menuWindow.on('closed', () => {
+      menuWindow = null;
+    });
+  }
+  createWindow();
+};
+
 if (process.platform === 'darwin') {
   templete.unshift({
     label: 'Tiny',
@@ -39,23 +58,7 @@ if (process.platform === 'darwin') {
       {
         label: '偏好设置...',
         accelerator: 'CmdOrCtrl+,',
-        click() {
-          const options = { width: 600, height: 600 },
-            windowUrl = isDev()
-              ? 'http://localhost:8080/#/menu'
-              : `file://${resolve(
-                  app.getAppPath(),
-                  'dist/web/index.html#/menu'
-                )}`;
-          let menuWindow;
-          function createWindow() {
-            menuWindow = initWindow(windowUrl, options);
-            menuWindow.on('closed', () => {
-              menuWindow = null;
-            });
-          }
-          createWindow();
-        }
+        click: preferencesAction
       },
       { type: 'separator' },
       { label: '服务', role: 'services', submenu: [] },
@@ -67,9 +70,16 @@ if (process.platform === 'darwin') {
       { label: '退出 Tiny', role: 'quit' }
     ]
   });
+} else {
+  templete[0].submenu = templete[0].submenu.concat([{
+    type: 'separator'
+  }, {
+    label: '偏好设置...',
+    click: preferencesAction
+  }]);
 }
 
-exports.createMenu = function() {
+exports.createMenu = function () {
   Menu.setApplicationMenu(Menu.buildFromTemplate(templete));
 };
 

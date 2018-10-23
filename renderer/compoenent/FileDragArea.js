@@ -15,7 +15,7 @@ const DraggerStyled = styled(Dragger)`
   }
   .ant-upload-list {
     max-height: calc(100vh - 210px);
-    overflow: scroll;
+    overflow-y: scroll;
   }
 `;
 
