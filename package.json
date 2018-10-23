@@ -9,7 +9,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
     "start-ele": "cross-env NODE_ENV=development electron .",
-    "build": "cross-env NODE_ENV=production && webpack && build"
+    "build": "cross-env NODE_ENV=production && webpack && build",
+    "build-all": "cross-env NODE_ENV=production && webpack && build -mwl"
   },
   "build": {
     "appId": "com.electron.tiny",

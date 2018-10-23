@@ -4,7 +4,7 @@ const fs = require('fs');
 function getFileNameFromPath(path) {
   const platform = process.platform;
   let fileName;
-  if (platform === 'darwin') {
+  if (platform === 'darwin' || platform === 'linux') {
     fileName = path.split('/').pop();
   } else if (platform === 'win32') {
     fileName = path.split('\\').pop();
