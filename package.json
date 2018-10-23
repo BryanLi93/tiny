@@ -25,6 +25,9 @@
       "category": "public.app-category.developer-tools",
       "target": "dmg",
       "icon": "./assets/compressor.png"
+    },
+    "win": {
+      "icon": "./assets/compressor.png"
     }
   },
   "dependencies": {

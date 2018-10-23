@@ -35,12 +35,10 @@ const preferencesAction = () => {
   const options = { width: 600, height: 600 },
     windowUrl = isDev()
       ? 'http://localhost:8080/#/menu'
-      : `file://${resolve(
-        app.getAppPath(),
-        'dist/web/index.html#/menu'
-      )}`;
+      : `file://${resolve(app.getAppPath(), 'dist/web/index.html#/menu')}`;
   let menuWindow;
   function createWindow() {
+    console.log(windowUrl);
     menuWindow = initWindow(windowUrl, options);
     menuWindow.on('closed', () => {
       menuWindow = null;
@@ -71,15 +69,19 @@ if (process.platform === 'darwin') {
     ]
   });
 } else {
-  templete[0].submenu = templete[0].submenu.concat([{
-    type: 'separator'
-  }, {
-    label: '偏好设置...',
-    click: preferencesAction
-  }]);
+  templete[0].submenu = templete[0].submenu.concat([
+    {
+      type: 'separator'
+    },
+    {
+      label: '偏好设置...',
+      accelerator: 'CmdOrCtrl+,',
+      click: preferencesAction
+    }
+  ]);
 }
 
-exports.createMenu = function () {
+exports.createMenu = function() {
   Menu.setApplicationMenu(Menu.buildFromTemplate(templete));
 };
 

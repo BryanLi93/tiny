@@ -2,7 +2,14 @@ const { ipcMain } = require('electron');
 const fs = require('fs');
 
 function getFileNameFromPath(path) {
-  return path.split('/').pop();
+  const platform = process.platform;
+  let fileName;
+  if (platform === 'darwin') {
+    fileName = path.split('/').pop();
+  } else if (platform === 'win32') {
+    fileName = path.split('\\').pop();
+  }
+  return fileName;
 }
 
 const onCompress = _window => {
