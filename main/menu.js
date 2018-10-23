@@ -1,5 +1,6 @@
-const { app, Menu } = require('electron'),
-  { resolve } = require('path'),
+const { app, Menu, dialog } = require('electron'),
+  { join } = require('path'),
+  { format } = require('url'),
   { isDev } = require('../config/env.js'),
   { initWindow } = require('./window.js');
 
@@ -33,12 +34,25 @@ const templete = [
 
 const preferencesAction = () => {
   const options = { width: 600, height: 600 },
+    // windowUrl = isDev()
+    //   ? 'http://localhost:8080/#/menu'
+    //   :  `file://${resolve(app.getAppPath(), 'dist/web/index.html#/menu')}`;
     windowUrl = isDev()
-      ? 'http://localhost:8080/#/menu'
-      : `file://${resolve(app.getAppPath(), 'dist/web/index.html#/menu')}`;
+      ? format({
+          protocol: 'http:',
+          slashes: true,
+          host: 'localhost:8080',
+          hash: '/menu'
+        })
+      : format({
+          protocol: 'file:',
+          slashes: true,
+          pathname: join(app.getAppPath(), 'dist/web/index.html'),
+          hash: '/menu'
+        });
+
   let menuWindow;
   function createWindow() {
-    console.log(windowUrl);
     menuWindow = initWindow(windowUrl, options);
     menuWindow.on('closed', () => {
       menuWindow = null;

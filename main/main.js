@@ -1,5 +1,6 @@
 const { app, dialog } = require('electron'),
-  { resolve } = require('path'),
+  { join } = require('path'),
+  { format } = require('url'),
   { createMenu } = require('./menu.js'),
   { initWindow } = require('./window.js'),
   { isDev } = require('../config/env.js');
@@ -7,9 +8,20 @@ const { app, dialog } = require('electron'),
 const { onCompress } = require('./service/compressService.js');
 
 const options = { width: 400, height: 600 },
+  // windowUrl = isDev()
+  //   ? 'http://localhost:8080'
+  //   : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
   windowUrl = isDev()
-    ? 'http://localhost:8080'
-    : `file://${resolve(app.getAppPath(), 'dist/web/index.html')}`;
+    ? format({
+        protocol: 'http:',
+        slashes: true,
+        host: 'localhost:8080'
+      })
+    : format({
+        protocol: 'file:',
+        slashes: true,
+        pathname: join(app.getAppPath(), 'dist/web/index.html')
+      });
 let mainWindow;
 
 function registerService() {
