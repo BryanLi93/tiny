@@ -32,7 +32,9 @@ const templete = [
   }
 ];
 
-const preferencesAction = () => {
+let menuWindow;
+
+function createMenuWindow() {
   const options = { width: 600, height: 600 },
     // windowUrl = isDev()
     //   ? 'http://localhost:8080/#/menu'
@@ -50,15 +52,18 @@ const preferencesAction = () => {
           pathname: join(app.getAppPath(), 'dist/web/index.html'),
           hash: '/menu'
         });
+  menuWindow = initWindow(windowUrl, options);
+  menuWindow.on('closed', () => {
+    menuWindow = null;
+  });
+}
 
-  let menuWindow;
-  function createWindow() {
-    menuWindow = initWindow(windowUrl, options);
-    menuWindow.on('closed', () => {
-      menuWindow = null;
-    });
+const preferencesAction = () => {
+  if (menuWindow) {
+    menuWindow.show();
+  } else {
+    createMenuWindow();
   }
-  createWindow();
 };
 
 if (process.platform === 'darwin') {
@@ -98,5 +103,3 @@ if (process.platform === 'darwin') {
 exports.createMenu = function() {
   Menu.setApplicationMenu(Menu.buildFromTemplate(templete));
 };
-
-exports.templete = templete;

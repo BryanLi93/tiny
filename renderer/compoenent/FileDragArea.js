@@ -38,6 +38,7 @@ class FileDragArea extends React.Component {
     });
     sendCompress(this.state.fileList).then(({ success, msg }) => {
       if (success) {
+        // 压缩成功后清空待压缩文件列表
         message.success(msg);
         this.setState({
           fileList: []
@@ -68,6 +69,7 @@ class FileDragArea extends React.Component {
         });
       },
       beforeUpload: file => {
+        // 拖放文件至压缩区，更新待压缩文件列表，并阻止组件自动压缩，待点击“压缩图片”按钮进行压缩
         if (['image/png', 'image/jpeg'].includes(file.type)) {
           this.setState(({ fileList }) => ({
             fileList: [...fileList, file]
@@ -82,9 +84,6 @@ class FileDragArea extends React.Component {
           <p className="ant-upload-drag-icon">
             <Icon type="inbox" />
           </p>
-          {/* <p className="ant-upload-text">
-            点击或者将图片拖拽到该区域压缩
-          </p> */}
           <p className="ant-upload-hint">点击或将图片拖拽到该区域进行压缩</p>
         </DraggerStyled>
         <Bottom>

@@ -1,7 +1,6 @@
 import { HashRouter, Route } from 'react-router-dom';
 import home from '../view/home.js';
 import menu from '../view/menu.js';
-// import IpcRenderListeners from './ipcRenderListeners.js';
 
 export default (
   <HashRouter>

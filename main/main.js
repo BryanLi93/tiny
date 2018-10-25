@@ -3,9 +3,8 @@ const { app, dialog } = require('electron'),
   { format } = require('url'),
   { createMenu } = require('./menu.js'),
   { initWindow } = require('./window.js'),
-  { isDev } = require('../config/env.js');
-
-const { onCompress } = require('./service/compressService.js');
+  { isDev } = require('../config/env.js'),
+  { onCompress } = require('./service/compressService.js');
 
 const options = { width: 400, height: 600 },
   // windowUrl = isDev()
@@ -24,32 +23,26 @@ const options = { width: 400, height: 600 },
       });
 let mainWindow;
 
-function registerService() {
-  onCompress(mainWindow);
-  app.on('activate', () => {
-    if (mainWindow === null) {
-      mainWindow = createWindow();
-    }
-  });
-}
-
 function createWindow() {
   mainWindow = initWindow(windowUrl, options);
   mainWindow.on('closed', () => {
     mainWindow = null;
   });
-  registerService(mainWindow);
+  onCompress(mainWindow);
 }
 
 function init() {
-  // const options = { width: 600, height: 600 },
-  // windowUrl = isDev() ? 'http://localhost:8080/#/menu' : `file://${resolve(app.getAppPath(), 'dist/web/index.html/#/menu')}`;
   createWindow();
-  // init menu
   createMenu();
 }
 
 app.on('ready', init);
+
+app.on('activate', () => {
+  if (mainWindow === null) {
+    createWindow();
+  }
+});
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {

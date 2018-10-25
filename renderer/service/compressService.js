@@ -12,7 +12,9 @@ const sendCompress = fileList => {
     ipcRenderer.on('compress:success', () => {
       resolve({ success: true, msg: '压缩成功～' });
     });
-    ipcRenderer.on('compress:fail', () => {
+    // TODO: 捕捉压缩失败原因
+    ipcRenderer.on('compress:fail', (event, message) => {
+      console.log(message);
       resolve({ success: false, msg: '压缩失败！' });
     });
     ipcRenderer.send('compress', {
